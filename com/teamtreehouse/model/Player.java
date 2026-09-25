@@ -1,6 +1,7 @@
 package com.teamtreehouse.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Player implements Comparable<Player>, Serializable {
   private static final long serialVersionUID = 1L;
@@ -36,7 +37,11 @@ public class Player implements Comparable<Player>, Serializable {
   @Override
   public int compareTo(Player other) {
     // We always want to sort by last name then first name
-    return 0;
+      int lastNameComparison = this.getLastName().compareTo(other.getLastName());
+      if (lastNameComparison != 0) {
+          return lastNameComparison;
+      }
+      return this.getFirstName().compareTo(other.getFirstName());
   }
 
   @Override
@@ -61,4 +66,13 @@ public class Player implements Comparable<Player>, Serializable {
     result = 31 * result + (previousExperience ? 1 : 0);
     return result;
   }
+
+    @Override
+    public String toString() {
+        return firstName + " " +
+                lastName  + " " +
+                "(" + heightInInches + " " + "inches" + "--" +
+                previousExperience +
+                ')';
+    }
 }
